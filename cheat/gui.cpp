@@ -321,6 +321,7 @@ void gui::Render() noexcept
 			{
 				ImGui::Checkbox("Autoshoot", &globals::autoshoot);
 				ImGui::SliderFloat("Smoothing", &globals::smoothing, 1.f, 80.f);
+				ImGui::SliderFloat("Fov", &globals::bestfov, 0.f, 180.f);
 			}
 
 		} else if (data.name == "Visuals")

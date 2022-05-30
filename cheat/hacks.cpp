@@ -32,6 +32,9 @@ void hacks::VisualsThread(const Memory& mem) noexcept
 
 		const auto localTeam = mem.Read<std::int32_t>(localPlayer + offsets::m_iTeamNum);
 
+		if (!localTeam)
+			continue;
+
 		for (auto i = 1; i <= 32; i++)
 		{
 			const auto player = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwEntityList + i * 0x10);
@@ -192,7 +195,7 @@ void hacks::LegitBotThread(const Memory& mem) noexcept
 			const auto viewAngles = mem.Read<Vector3>(clientState + offsets::dwClientState_ViewAngles);
 			const auto aimPunch = mem.Read<Vector3>(localPlayer + offsets::m_aimPunchAngle) * 2;
 
-			auto bestFov = 5.f;
+			auto bestFov = globals::bestfov;
 			auto bestAngle = Vector3{ };
 
 			for (auto i = 1; i <= 32; ++i)
@@ -241,6 +244,7 @@ void hacks::LegitBotThread(const Memory& mem) noexcept
 			{
 				mem.Write<Vector3>(clientState + offsets::dwClientState_ViewAngles, viewAngles + bestAngle / globals::smoothing); // smoothing
 
+				// Autoshoot
 				if (globals::autoshoot)
 				{
 					const auto crosshairId = mem.Read<std::int32_t>(localPlayer + offsets::m_iCrosshairId);

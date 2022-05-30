@@ -21,6 +21,7 @@ namespace globals
 	inline bool aimbot = false;
 	inline bool autoshoot = false;
 	inline float smoothing = 3.f;
+	inline float bestfov = 5.f;
 
 	//Misc
 	inline bool bhop = false;

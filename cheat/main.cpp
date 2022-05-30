@@ -4,27 +4,6 @@
 
 #include <thread>
 
-template <typename T>
-T* GetInterface(const char* interfaceName, const char* moduleName)
-{
-	const auto handle = GetModuleHandle(moduleName);
-
-	if (!handle)
-	{
-		return nullptr;
-	}
-
-	using Fn = T * (*)(const char*, int*);
-	const auto CreateInterface = reinterpret_cast<Fn>(GetProcAddress(handle, "CreateInterface"));
-
-	if (!CreateInterface)
-	{
-		return nullptr;
-	}
-
-	return CreateInterface(interfaceName, nullptr);
-}
-
 int __stdcall wWinMain(
 	HINSTANCE instance,
 	HINSTANCE previousInstance,
