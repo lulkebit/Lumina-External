@@ -13,7 +13,8 @@ namespace globals
 	inline bool thirdperson = false;
 	inline bool model_ambient_tog = false;
 	inline float model_ambient_val = 1.f;
-
+	inline bool noFlash = false;
+	inline float flashAplha = 0.f;
 
 	// Legitbot
 	inline bool triggerbot = false;
@@ -51,6 +52,7 @@ namespace offsets
 	constexpr ::std::ptrdiff_t m_aimPunchAngle = 0x303C;
 	constexpr ::std::ptrdiff_t m_bSpottedByMask = 0x980;
 	constexpr ::std::ptrdiff_t m_bDormant = 0xED;
+	constexpr ::std::ptrdiff_t m_flFlashMaxAlpha = 0x1046C;
 
 	constexpr ::std::ptrdiff_t model_ambient_min = 0x58F054;
 }

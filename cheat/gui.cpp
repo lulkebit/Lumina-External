@@ -337,6 +337,11 @@ void gui::Render() noexcept
 			{
 				ImGui::SliderFloat("Value", &globals::model_ambient_val, 1.f, 25.f);	
 			}
+			ImGui::Checkbox("No Flash", &globals::noFlash);
+			if (globals::noFlash)
+			{
+				ImGui::SliderFloat("Flash Aplha", &globals::flashAplha, 0.0f, 255.0f);
+			}
 
 		} else if (data.name == "Misc")
 		{

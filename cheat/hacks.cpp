@@ -96,6 +96,15 @@ void hacks::VisualsThread(const Memory& mem) noexcept
 		{
 			mem.Write<int>(globals::engineAdress + offsets::model_ambient_min, 0);
 		}
+
+		if (globals::noFlash)
+		{
+			mem.Write<float>(localPlayer + offsets::m_flFlashMaxAlpha, globals::flashAplha);
+		}
+		else
+		{
+			mem.Write<float>(localPlayer + offsets::m_flFlashMaxAlpha, 255.0f);
+		}
 	}
 }
 
