@@ -22,6 +22,7 @@ namespace globals
 	inline bool autoshoot = false;
 	inline float smoothing = 3.f;
 	inline float bestfov = 5.f;
+	inline bool magnettrigger = false;
 
 	//Misc
 	inline bool bhop = false;

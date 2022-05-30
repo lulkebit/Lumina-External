@@ -178,9 +178,14 @@ void hacks::LegitBotThread(const Memory& mem) noexcept
 		// Aimbot
 		if (globals::aimbot)
 		{
-			if (!GetAsyncKeyState(VK_LBUTTON))
-				continue;
+			if (globals::magnettrigger == false) {
 
+				if (!GetAsyncKeyState(VK_LBUTTON))
+					continue;
+
+			}
+			
+			
 			const auto localPlayer = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwLocalPlayer);
 			const auto localTeam = mem.Read<std::int32_t>(localPlayer + offsets::m_iTeamNum);
 

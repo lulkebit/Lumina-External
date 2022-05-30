@@ -317,11 +317,20 @@ void gui::Render() noexcept
 
 			ImGui::Checkbox("Triggerbot", &globals::triggerbot);
 			ImGui::Checkbox("Aimbot", &globals::aimbot);
+
+			if (globals::triggerbot) {
+
+				ImGui::Checkbox("MagnetTrigger", &globals::magnettrigger);
+
+			}
+
+
 			if (globals::aimbot)
 			{
 				ImGui::Checkbox("Autoshoot", &globals::autoshoot);
 				ImGui::SliderFloat("Smoothing", &globals::smoothing, 1.f, 80.f);
-				ImGui::SliderFloat("Fov", &globals::bestfov, 0.f, 180.f);
+				ImGui::SliderFloat("Fov", &globals::bestfov, 0.f, 360.f);
+				
 			}
 
 		} else if (data.name == "Visuals")
