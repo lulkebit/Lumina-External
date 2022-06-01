@@ -27,6 +27,7 @@ namespace globals
 	//Misc
 	inline bool bhop = false;
 	inline bool radar = false;
+	inline bool clantag = false;
 }
 
 namespace offsets
@@ -57,4 +58,7 @@ namespace offsets
 	constexpr ::std::ptrdiff_t m_flFlashMaxAlpha = 0x1046C;
 
 	constexpr ::std::ptrdiff_t model_ambient_min = 0x58F054;
+	//clantag
+
+	constexpr ::std::ptrdiff_t dwSetClanTag = 0x8A320;
 }

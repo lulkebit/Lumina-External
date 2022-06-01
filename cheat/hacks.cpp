@@ -4,7 +4,11 @@
 #include "vector.h"
 
 #include <thread>
+#include "../imgui/imgui_widgets.cpp"
 
+
+
+using namespace std;
 
 constexpr Vector3 CalculateAngle(
 	const Vector3& localPosition,
@@ -110,6 +114,26 @@ void hacks::VisualsThread(const Memory& mem) noexcept
 		}
 	}
 }
+
+void hacks::MiscThread(const Memory& mem) noexcept 
+{
+
+	while (gui::isRunning) 
+	{
+		Sleep(1);
+
+		if (globals::clantag)
+		{
+			const auto localPlayer = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwLocalPlayer);
+			mem.Write<string>(localPlayer + offsets::dwSetClanTag, "L");
+			
+
+		}
+
+	}
+}
+
+
 
 void hacks::MovementThread(const Memory& mem) noexcept
 {

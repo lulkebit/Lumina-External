@@ -323,6 +323,13 @@ void gui::Render() noexcept
 				ImGui::Checkbox("MagnetTrigger", &globals::magnettrigger);
 
 			}
+			if (globals::magnettrigger)
+			{
+
+				globals::aimbot == true;
+
+			}
+			
 
 
 			if (globals::aimbot)
@@ -358,6 +365,7 @@ void gui::Render() noexcept
 
 			ImGui::Checkbox("Radarhack", &globals::radar);
 			ImGui::Checkbox("Bunnyhop", &globals::bhop);
+			ImGui::Checkbox("custom Clantag", &globals::clantag);
 
 		}
 	}
