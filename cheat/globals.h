@@ -37,6 +37,15 @@ namespace offsets
 	constexpr ::std::ptrdiff_t m_hMyWeapons = 0x2E08;
 	constexpr ::std::ptrdiff_t m_hActiveWeapon = 0x2F08;
 	constexpr ::std::ptrdiff_t m_nFallbackPaintKit = 0x31D8;
+	constexpr ::std::ptrdiff_t m_flFallbackWear = 0x31E0;
+	constexpr ::std::ptrdiff_t m_nFallbackSeed = 0x31DC;
+	constexpr ::std::ptrdiff_t m_nFallbackStatTrak = 0x31E4;
+	constexpr ::std::ptrdiff_t m_iItemDefinitionIndex = 0x2FBA;
+	constexpr ::std::ptrdiff_t m_iItemIDHigh = 0x2FD0;
+	constexpr ::std::ptrdiff_t m_iEntityQuality = 0x2FBC;
+	constexpr ::std::ptrdiff_t m_iAccountID = 0x2FD8;
+	constexpr ::std::ptrdiff_t m_OriginalOwnerXuidLow = 0x31D0;
+	constexpr ::std::ptrdiff_t m_clrRender = 0x70;
 
 	constexpr ::std::ptrdiff_t model_ambient_min = 0x5A118C;
 }

@@ -12,5 +12,5 @@ namespace hacks
 	// run legitbot hacks
 	void LegitBotThread(const Memory& mem) noexcept;
 
-	//void SkinChangerThread(const Memory& mem) noexcept;
+	void SkinChangerThread(const Memory& mem) noexcept;
 }

@@ -26,7 +26,7 @@ public:
 		float fSmooth{ 3.f };
 
 
-		// Glow
+		// Visuals
 		bool bGlow{ false };
 		float fGlowColor[4]{ 1.0f, 0.0f, 0.0f, 1.0f };
 		bool bThirdperson{ false };
@@ -34,6 +34,9 @@ public:
 		float fModelAmbient{ 1.f };
 		bool bNoFlash{ false };
 		float fNoFlash{ 0.f };
+		bool bChams{ false };
+		float fTeamColor[3]{ 0, 0, 255 };
+		float fEnemyColor[3]{ 255, 0, 0 };
 		
 
 		// Misc

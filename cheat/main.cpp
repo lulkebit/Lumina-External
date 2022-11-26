@@ -21,7 +21,7 @@ int __stdcall wWinMain(
 	std::thread(hacks::VisualsThread, mem).detach();
 	std::thread(hacks::MovementThread, mem).detach();
 	std::thread(hacks::LegitBotThread, mem).detach();
-	//std::thread(hacks::SkinChangerThread, mem).detach();
+	std::thread(hacks::SkinChangerThread, mem).detach();
 	config_system.run("Lumina");
 
 	// create gui

@@ -5,6 +5,7 @@
 #include "config/config.hpp"
 
 #include <thread>
+#include <array>
 
 
 constexpr Vector3 CalculateAngle(
@@ -15,8 +16,14 @@ constexpr Vector3 CalculateAngle(
 	return ((enemyPosition - localPosition).ToAngle() - viewAngles);
 }
 
+struct Color
+{
+	std::uint8_t r{ }, g{ }, b{ };
+};
+
 void hacks::VisualsThread(const Memory& mem) noexcept
 {
+
 	while (gui::isRunning)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
@@ -47,6 +54,9 @@ void hacks::VisualsThread(const Memory& mem) noexcept
 
 			if (team == localTeam)
 				continue;
+			//{
+				//mem.Write<std::uint8_t>(player + offsets::m_clrRender, { config_system.item.fTeamColor[0], config_system.item.fTeamColor[1], config_system.item.fTeamColor[2] });
+			//}
 
 			const auto lifeState = mem.Read<std::int32_t>(player + offsets::m_lifeState);
 
@@ -68,6 +78,11 @@ void hacks::VisualsThread(const Memory& mem) noexcept
 
 			if (config_system.item.bRadar)
 				mem.Write(player + offsets::m_bSpotted, true);
+
+			if (config_system.item.bChams)
+			{
+
+			}
 		}
 
 		if (config_system.item.bThirdperson)
@@ -188,7 +203,6 @@ void hacks::LegitBotThread(const Memory& mem) noexcept
 
 			}
 			
-			
 			const auto localPlayer = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwLocalPlayer);
 			const auto localTeam = mem.Read<std::int32_t>(localPlayer + offsets::m_iTeamNum);
 
@@ -278,82 +292,75 @@ void hacks::LegitBotThread(const Memory& mem) noexcept
 	}
 }
 
-//void hacks::SkinChangerThread(const Memory& mem) noexcept
-//{
-//	enum AllWeaponsIDs
-//	{
-//		WEAPON_AWP = 9,
-//		WEAPON_G3SG1 = 11,
-//		WEAPON_SCAR20 = 38,
-//		WEAPON_SSG = 40,
-//		WEAPON_AK47 = 7,
-//		WEAPON_AUG = 8,
-//		WEAPON_FAMAS = 10,
-//		WEAPON_GALILAR = 13,
-//		WEAPON_M4A1 = 60,
-//		WEAPON_M4A4 = 16,
-//		WEAPON_SG553 = 39,
-//		WEAPON_USP = 61,
-//		WEAPON_REVOLVER = 64,
-//		WEAPON_CZ75 = 63,
-//		WEAPON_DEAGLE = 1,
-//		WEAPON_BERETTAS = 2,
-//		WEAPON_FIVESEVEN = 3,
-//		WEAPON_GLOCK = 4,
-//		WEAPON_P2000 = 32,
-//		WEAPON_P250 = 36,
-//		WEAPON_TEC9 = 30,
-//		WEAPON_MAC10 = 17,
-//		WEAPON_MP7 = 33,
-//		WEAPON_MP9 = 34,
-//		WEAPON_MP5 = 23,
-//		WEAPON_PPBIZON = 26,
-//		WEAPON_P90 = 19,
-//		WEAPON_UMP45 = 24,
-//		WEAPON_MAG7 = 27,
-//		WEAPON_NOVA = 35,
-//		WEAPON_SAWEDOFF = 29,
-//		WEAPON_XM1014 = 25,
-//		WEAPON_M249 = 14,
-//		WEAPON_NEGEV = 28,
-//
-//		WEAPON_KNIFE_T = 59,
-//		WEAPON_KNIFE_CT = 42,
-//		WEAPON_KNIFE_KARAM = 507,
-//		WEAPON_KNIFE_BAYONET = 500,
-//		WEAPON_KNIFE_CLASSIC = 503,
-//		WEAPON_KNIFE_FLIP = 505,
-//		WEAPON_KNIFE_GUT = 506,
-//		WEAPON_KNIFE_M9 = 508,
-//		WEAPON_KNIFE_HUNTSMAN = 509,
-//		WEAPON_KNIFE_FALCHION = 512,
-//		WEAPON_KNIFE_BOWIE = 514,
-//		WEAPON_KNIFE_BUTTERFLY = 515,
-//		WEAPON_KNIFE_DAGGERS = 516,
-//		WEAPON_KNIFE_PARACORD = 517,
-//		WEAPON_KNIFE_SURVIVAL = 518,
-//		WEAPON_KNIFE_URSUS = 519,
-//		WEAPON_KNIFE_NAVAJA = 520,
-//		WEAPON_KNIFE_NOMAD = 521,
-//		WEAPON_KNIFE_STILETTO = 522,
-//		WEAPON_KNIFE_TALON = 523,
-//		WEAPON_KNIFE_SKELETON = 525,
-//	};
-//
-//	for (int i = 0; i < 3; i++)
-//	{
-//		// Get Weapon Index
-//		DWORD WeaponIndex = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwLocalPlayer + offsets::m_hMyWeapons + i * 0x4) & 0xFFFF;
-//		// Get EntityList
-//		DWORD EntityList = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwEntityList + (WeaponIndex - 1) * 0x10);
-//		// Get Current Weapon ID in loop
-//		DWORD CurrentWeaponID = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwEntityList + offsets::m_hActiveWeapon);
-//
-//		if (CurrentWeaponID == WEAPON_AK47)
-//		{
-//			// Get current weapon skin
-//			DWORD CurrentWeaponSkin = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwEntityList + offsets::m_nFallbackPaintKit);
-//			mem.Write(offsets::dwEntityList + offsets::m_nFallbackPaintKit, WEAPON_AK47);
-//		}
-//	}
-//}
+// set skins to apply here
+constexpr const int GetWeaponPaint(const short& itemDefinition)
+{
+	switch (itemDefinition)
+	{
+	case 1: return 711;		// deagle
+	case 2: return 396;		// duals
+	case 3: return 427;		// five seven
+	case 4: return 38;		// glock
+	case 7: return 490;		// ak
+	case 8: return 455;		// aug
+	case 9: return 344;		// awp
+	case 10: return 429;	// famas
+	case 11: return 493;	// g3sg1
+	case 13: return 494;	// galil
+	case 14: return 496;	// m249
+	case 16: return 309;	// m4a4
+	case 17: return 433;	// mac10
+	case 19: return 636;	// p90
+	case 23: return 254;	// mp5-sd
+	case 24: return 556;	// ump45
+	case 25: return 616;	// xm1014
+	case 26: return 676;	// pp bizon
+	case 27: return 703;	// mag7
+	case 28: return 610;	// negev
+	case 29: return 256;	// sawed off
+	case 30: return 644;	// tec9
+	case 32: return 389;	// p2000
+	case 33: return 481;	// mp7
+	case 34: return 679;	// mp9
+	case 35: return 62;		// nova
+	case 36: return 678;	// p250
+	case 38: return 165;	// scar-20
+	case 39: return 686;	// sg553
+	case 40: return 624;	// ssg08
+	case 60: return 548;	// m4a1-s
+	case 61: return 653;	// usp
+	default: return 0;
+	}
+}
+
+void hacks::SkinChangerThread(const Memory& mem) noexcept
+{
+	while (gui::isRunning)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(2));
+
+		const auto& localPlayer = mem.Read<std::uintptr_t>(globals::clientAdress + offsets::dwLocalPlayer);
+		const auto& weapons = mem.Read<std::array<unsigned long, 8>>(localPlayer + offsets::m_hMyWeapons);
+
+		for (const auto& handle : weapons)
+		{
+			const auto& weapon = mem.Read<std::uintptr_t>((globals::clientAdress + offsets::dwEntityList + (handle & 0xFFF) * 0x10) - 0x10);
+
+			if (!weapon)
+				continue;
+
+			if (const auto paint = GetWeaponPaint(mem.Read<short>(weapon + offsets::m_iItemDefinitionIndex)))
+			{
+				const bool shouldUpdate = mem.Read<std::uintptr_t>(weapon + offsets::m_nFallbackPaintKit) != paint;
+
+				mem.Write<std::uintptr_t>(weapon + offsets::m_iItemIDHigh, -1);
+
+				mem.Write<std::uintptr_t>(weapon + offsets::m_nFallbackPaintKit, paint);
+				mem.Write<float>(weapon + offsets::m_flFallbackWear, 0.1f);
+
+				if (shouldUpdate)
+					mem.Write<std::uintptr_t>(mem.Read<std::uintptr_t>(globals::engineAdress + offsets::dwClientState) + 0x174, -1);
+			}
+		}
+	}
+}
