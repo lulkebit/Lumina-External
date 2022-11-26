@@ -20,7 +20,6 @@ public:
 		// LegitBot
 		bool bAimbot{ false };
 		bool bTriggerbot{ false };
-		bool bAutoshoot{ false };
 		bool bMagnetTrigger{ false };
 		float fFov{ 5.0f };
 		float fSmooth{ 3.f };

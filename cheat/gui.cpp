@@ -322,18 +322,15 @@ void gui::Render() noexcept
 		{
 
 			ImGui::Checkbox("Triggerbot", &config_system.item.bTriggerbot);
-			ImGui::Checkbox("Aimbot", &config_system.item.bAimbot);
-
-			if (&config_system.item.bTriggerbot) {
+			if (config_system.item.bTriggerbot) {
 
 				ImGui::Checkbox("MagnetTrigger", &config_system.item.bMagnetTrigger);
 
 			}
 
-
-			if (&config_system.item.bAimbot)
+			ImGui::Checkbox("Aimbot", &config_system.item.bAimbot);
+			if (config_system.item.bAimbot)
 			{
-				ImGui::Checkbox("Autoshoot", &config_system.item.bAutoshoot);
 				ImGui::SliderFloat("Smoothing", &config_system.item.fSmooth, 1.f, 80.f);
 				ImGui::SliderFloat("Fov", &config_system.item.fFov, 0.f, 360.f);
 			}
@@ -342,18 +339,14 @@ void gui::Render() noexcept
 		{
 
 			ImGui::Checkbox("Glow", &config_system.item.bGlow);
-			if (&config_system.item.bGlow)
+			if (config_system.item.bGlow)
 			{
 				ImGui::ColorEdit4("Glow color", config_system.item.fGlowColor);
 			}
 			ImGui::Checkbox("Thirdperson", &config_system.item.bThirdperson);
 			ImGui::Checkbox("Model Ambient", &config_system.item.bModelAmbient);
-			if (&config_system.item.bModelAmbient)
-			{
-				ImGui::SliderFloat("Value", &config_system.item.fModelAmbient, 1.f, 25.f);
-			}
 			ImGui::Checkbox("No Flash", &config_system.item.bNoFlash);
-			if (&config_system.item.bNoFlash)
+			if (config_system.item.bNoFlash)
 			{
 				ImGui::SliderFloat("Flash Aplha", &config_system.item.fNoFlash, 0.0f, 255.0f);
 			}
